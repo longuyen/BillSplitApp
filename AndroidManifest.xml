@@ -30,6 +30,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.app.billsplitapp.MainActivity" />
         </activity>
+        <activity
+            android:name="com.app.billsplitapp.BillSplitCalculatorActivity"
+            android:label="@string/title_activity_bill_split_calculator" >
+        </activity>
     </application>
 
 </manifest>

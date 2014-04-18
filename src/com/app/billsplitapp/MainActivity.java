@@ -64,13 +64,17 @@ public class MainActivity extends ActionBarActivity {
         }
     }
     
-    /**Call when click send*/
+/*    *//**Call when click send*//*
     public void sendMessage(View view){
     	Intent intent = new Intent(this, DisplayMessageActivity.class);
     	EditText editText = (EditText) findViewById(R.id.edit_message);
     	String message = editText.getText().toString();
     	intent.putExtra(EXTRA_MESSAGE, message);
     	startActivity(intent);
-    }
+    }*/
 
+    public void calculateBillSplit(View view) {
+    	Intent intent = new Intent(this, BillSplitCalculatorActivity.class);
+    	startActivity(intent);
+    }
 }
