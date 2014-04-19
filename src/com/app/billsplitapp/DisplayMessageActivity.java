@@ -18,7 +18,9 @@ public class DisplayMessageActivity extends ActionBarActivity {
 		
 		// Get the message from the intent
 		Intent intent = getIntent();
-		String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+		Double total = intent.getDoubleExtra(BillSplitCalculatorActivity.EXTRA_BILL_TOTAL, 0.0);
+		//String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+		String message = total.toString();
 		
 		//Create the text view
 		TextView textView = new TextView(this);
@@ -28,6 +30,15 @@ public class DisplayMessageActivity extends ActionBarActivity {
 		// Set the text view as the activ layout
 		setContentView(textView);
 		
+        try {   
+            GmailSender sender = new GmailSender("vietazn@gmail.com", "M0ntgomery");
+            sender.sendMail("Testing 123",   
+                    "This is Body" + message,   
+                    "vietazn@gmail.com",
+                    "hoanglong@gmail.com");   
+        } catch (Exception e) {   
+            System.out.println(e.getMessage());   
+        } 
 		
 /*		setContentView(R.layout.activity_display_message);
 
