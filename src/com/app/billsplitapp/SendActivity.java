@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 
 public class SendActivity extends ActionBarActivity {
@@ -21,25 +22,31 @@ public class SendActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		Intent intent = getIntent();
 		Bundle b = intent.getExtras();
-		//TODO - get contacts list from Bundle
-		setContentView(R.layout.activity_activity_send);
-
+		//TODO - get contacts list from Bundle B
+		
 		//Dynamically generate layout
 		ScrollView contactsView = new ScrollView(this);
 		LinearLayout sendActivityLayout = new LinearLayout(this);
 		sendActivityLayout.setOrientation(LinearLayout.VERTICAL);
 		contactsView.addView(sendActivityLayout);
 		
-		//TODO - add TextView dynamically here
+		TextView sampleContact = new TextView(this);
+		sampleContact.setText(R.string.list_of_friends);
+		contactsView.addView(sampleContact);
+		
+		//TODO - loop through contacts and add TextView elements dynamically here
+				
 		
 		//Add button to confirm the split payment
-		Button button = new Button(this);
-		button.setText(R.string.confirm_split_button);
-		button.setOnClickListener(new View.OnClickListener() {
+		Button confirmButton = new Button(this);
+		confirmButton.setText(R.string.confirm_split_button);
+		confirmButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick (View v) {
 				//TODO - process the split payment
 			}
 		});
+		//add Confirm button to scroll view
+		contactsView.addView(confirmButton);
 			
 		//set the view
 		this.setContentView(contactsView);

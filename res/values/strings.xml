@@ -18,5 +18,6 @@
     <string name="custom">Custom</string>
     <string name="title_activity_activity_send">Review Split</string>
     <string name="confirm_split_button">Confirm Split</string>
+    <string name="list_of_friends">Friends to split with</string>
 
 </resources>
