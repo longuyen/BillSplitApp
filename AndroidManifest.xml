@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="7"
         android:targetSdkVersion="19" />
 
     <application
@@ -33,6 +33,10 @@
         <activity
             android:name="com.app.billsplitapp.BillSplitCalculatorActivity"
             android:label="@string/title_activity_bill_split_calculator" >
+        </activity>
+        <activity
+            android:name="com.app.billsplitapp.SendActivity"
+            android:label="@string/title_activity_activity_send" >
         </activity>
     </application>
 

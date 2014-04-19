@@ -16,6 +16,7 @@
     <string name="total">Total:</string>
     <string name="zero">0.00</string>
     <string name="custom">Custom</string>
-	
-    
+    <string name="title_activity_activity_send">Review Split</string>
+    <string name="confirm_split_button">Confirm Split</string>
+
 </resources>
