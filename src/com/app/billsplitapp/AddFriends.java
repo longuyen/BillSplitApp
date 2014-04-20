@@ -27,6 +27,7 @@ public class AddFriends extends ActionBarActivity implements AdapterView.OnItemS
     // pre-stored list
     static Map<String, String> preStored = new HashMap<String, String>();
     static {
+        preStored.put("", "");
         preStored.put("Long", "lnnguyen@amazon.com");
         preStored.put("Chen", "huangche@amazon.com");
         preStored.put("Tony", "tonyhu@amazon.com");
@@ -84,15 +85,7 @@ public class AddFriends extends ActionBarActivity implements AdapterView.OnItemS
 
     private String getFriendsStr(List<PaymentInfo> infos) {
         StringBuilder friendsStr = new StringBuilder();
-        int peopleCount = infos.size();
-        double perPerson  = 0;
-        if (peopleCount > 0) {
-            perPerson = total / peopleCount;
-        }
-        String perPersonStr = String.format("%.2f", perPerson);
-
         for (PaymentInfo info : infos) {
-            info.amount = perPerson;
             friendsStr.append(info.title).append("  ").append("\n");
         }
         return friendsStr.toString();
@@ -116,6 +109,12 @@ public class AddFriends extends ActionBarActivity implements AdapterView.OnItemS
         currentInfo.email = email;
         paymentInfo.add(currentInfo);
 
+        // reset total
+        double perPerson = total / paymentInfo.size();
+        for (PaymentInfo info : paymentInfo) {
+            info.amount = perPerson;
+        }
+
         EditText nameDisplay = (EditText) findViewById(R.id.nameList);
         nameDisplay.setText(getFriendsStr(paymentInfo));
     }
@@ -124,6 +123,9 @@ public class AddFriends extends ActionBarActivity implements AdapterView.OnItemS
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String selectedName = adapterView.getItemAtPosition(i).toString();
+        if (selectedName.equals("")) {
+            return;
+        }
         storeInfoAndUpdate(selectedName, preStored.get(selectedName));
     }
 
