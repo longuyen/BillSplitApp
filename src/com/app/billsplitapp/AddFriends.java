@@ -78,9 +78,10 @@ public class AddFriends extends ActionBarActivity implements AdapterView.OnItemS
         return super.onOptionsItemSelected(item);
     }
 
-    public void calculateBillSplit(View view) {
-        Intent intent = new Intent(this, BillSplitCalculatorActivity.class);
-        startActivity(intent);
+    public void resetFriends(View view) {
+        paymentInfo.clear();
+        EditText nameDisplay = (EditText) findViewById(R.id.nameList);
+        nameDisplay.setText("");
     }
 
     private String getFriendsStr(List<PaymentInfo> infos) {
