@@ -128,6 +128,8 @@ public class AddFriends extends ActionBarActivity implements AdapterView.OnItemS
             return;
         }
         storeInfoAndUpdate(selectedName, preStored.get(selectedName));
+        Spinner dropdown = (Spinner) findViewById(R.id.list);
+        dropdown.setSelection(0);
     }
 
     @Override
