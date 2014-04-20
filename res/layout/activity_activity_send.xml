@@ -4,11 +4,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.app.billsplitapp.SendActivity"
-    tools:ignore="MergeRootFrame">
-    
-    
-</FrameLayout> 
-    
-    
-    
-    
+    tools:ignore="MergeRootFrame" >
+
+    <TableLayout
+        android:id="@+id/homeTableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp" >
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Payment Summary"
+                android:id="@+id/textView"
+                android:layout_column="1" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:ems="10"
+                android:id="@+id/nameList"
+                android:layout_column="1" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send emails"
+                android:id="@+id/button"
+                android:onClick="calculateBillSplit"
+                android:layout_column="1" />
+        </TableRow>
+
+    </TableLayout>
+</FrameLayout>

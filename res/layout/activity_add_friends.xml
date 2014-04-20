@@ -84,7 +84,20 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:onClick="storeFriend"
-                android:text="@string/add_friends"
+                android:text="Add a friend"
+                android:layout_column="1" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Friends added"
+                android:id="@+id/textView"
                 android:layout_column="1" />
         </TableRow>
 
@@ -110,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:text="Even split"
                 android:id="@+id/button"
-                android:onClick="calculateBillSplit"
+                android:onClick="sendEmails"
                 android:layout_column="1" />
         </TableRow>
 

@@ -41,6 +41,11 @@
             android:name="com.app.billsplitapp.SendActivity"
             android:label="@string/title_activity_activity_send" >
         </activity>
+
+        <activity
+            android:name="com.app.billsplitapp.AddFriends"
+            android:label="@string/title_activity_add_friends" >
+        </activity>
     </application>
 
 </manifest>

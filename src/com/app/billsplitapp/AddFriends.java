@@ -21,6 +21,8 @@ public class AddFriends extends ActionBarActivity implements AdapterView.OnItemS
 
     List<PaymentInfo> paymentInfo = new ArrayList<PaymentInfo>();
     double total = 100;
+    public static String PAYMENT_LIST = "payment_list";
+    public static String DELIM = "##";
 
     // pre-stored list
     static Map<String, String> preStored = new HashMap<String, String>();
@@ -38,6 +40,11 @@ public class AddFriends extends ActionBarActivity implements AdapterView.OnItemS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friends);
         initList();
+
+        Bundle b = this.getIntent().getExtras();
+        if (b != null) {
+            total = b.getDouble(BillSplitCalculatorActivity.EXTRA_BILL_TOTAL);
+        }
     }
 
     public void initList() {
@@ -86,7 +93,7 @@ public class AddFriends extends ActionBarActivity implements AdapterView.OnItemS
 
         for (PaymentInfo info : infos) {
             info.amount = perPerson;
-            friendsStr.append(info.title).append("  ").append(perPersonStr).append("\n");
+            friendsStr.append(info.title).append("  ").append("\n");
         }
         return friendsStr.toString();
     }
@@ -122,5 +129,44 @@ public class AddFriends extends ActionBarActivity implements AdapterView.OnItemS
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+    }
+
+    public String [] generateStrArrayFromPaymentInfo(List<PaymentInfo> paymentInfo) {
+        String [] ret = new String[paymentInfo.size()];
+
+        for (int i = 0; i < paymentInfo.size(); ++i) {
+            StringBuilder builder = new StringBuilder();
+            PaymentInfo info = paymentInfo.get(i);
+            builder.append(info.title).append(DELIM).
+                    append(info.email).append(DELIM).
+                    append(info.amount);
+            ret[i] = builder.toString();
+        }
+        return ret;
+    }
+
+    public void sendEmails(View view){
+        Intent intent = new Intent(this, SendActivity.class);
+        intent.putExtra(PAYMENT_LIST, generateStrArrayFromPaymentInfo(
+                getDedupedPaymentInfo(paymentInfo)));
+        startActivity(intent);
+    }
+
+    private List<PaymentInfo> getDedupedPaymentInfo(List<PaymentInfo> infos) {
+        List<PaymentInfo> ret = new ArrayList<PaymentInfo>();
+        for (PaymentInfo info : infos) {
+            boolean found = false;
+            for (PaymentInfo exsitInfo : ret) {
+                if (info.title.equals(exsitInfo.title)) {
+                    exsitInfo.amount += info.amount;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                ret.add(info);
+            }
+        }
+        return ret;
     }
 }

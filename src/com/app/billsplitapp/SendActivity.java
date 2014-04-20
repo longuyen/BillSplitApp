@@ -10,22 +10,33 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class SendActivity extends ActionBarActivity {
+
+    List<PaymentInfo> paymentInfos = new ArrayList<PaymentInfo>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_activity_send);
+
 		Intent intent = getIntent();
-		Bundle b = intent.getExtras();
-		//TODO - get contacts list from Bundle B
+        String [] paymentStrings = intent.getExtras().getStringArray(AddFriends.PAYMENT_LIST);
+        getPaymentInfos(paymentStrings);
+
+        populatePaymentSummary();
+
 		
 		//Dynamically generate layout
-		ScrollView contactsView = new ScrollView(this);
+		/*ScrollView contactsView = new ScrollView(this);
 		LinearLayout sendActivityLayout = new LinearLayout(this);
 		sendActivityLayout.setOrientation(LinearLayout.VERTICAL);
 		contactsView.addView(sendActivityLayout);
@@ -49,13 +60,41 @@ public class SendActivity extends ActionBarActivity {
 		contactsView.addView(confirmButton);
 			
 		//set the view
-		this.setContentView(contactsView);
-		
-		if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-		}
+		this.setContentView(contactsView);  */
+
 	}
+
+    private void getPaymentInfos(String [] paymentInfoArray) {
+        paymentInfos = new ArrayList<PaymentInfo>();
+        for (int i = 0; i < paymentInfoArray.length; ++i) {
+            paymentInfos.add(getPaymentInfoFromStr(paymentInfoArray[i]));
+        }
+    }
+
+    private PaymentInfo getPaymentInfoFromStr(String infoStr) {
+        String [] parts = infoStr.split(AddFriends.DELIM);
+        PaymentInfo ret = new PaymentInfo();
+
+        ret.title = parts[0];
+        ret.email = parts[1];
+        ret.amount = Double.parseDouble(parts[2]);
+        return ret;
+    }
+
+    private String generateSummaryStr() {
+        StringBuilder builder = new StringBuilder();
+        for (PaymentInfo info : paymentInfos) {
+            String formattedAmount = String.format("%.2f", info.amount);
+            builder.append(info.title).append("\t").
+                    append(formattedAmount).append("\n");
+        }
+        return builder.toString();
+    }
+
+    private void populatePaymentSummary() {
+        EditText nameDisplay = (EditText) findViewById(R.id.nameList);
+        nameDisplay.setText(generateSummaryStr());
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -76,24 +115,4 @@ public class SendActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
-	
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_activity_send,
-					container, false);
-			return rootView;
-		}
-	}
-	
-
 }
