@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.app.billsplitapp.util.SendEmailAsyncTask;
+
 public class DisplayMessageActivity extends ActionBarActivity {
 
 	@Override
@@ -31,13 +33,11 @@ public class DisplayMessageActivity extends ActionBarActivity {
 		setContentView(textView);
 		
         try {   
-            GmailSender sender = new GmailSender("vietazn@gmail.com", "M0ntgomery");
-            sender.sendMail("Testing 123",   
-                    "This is Body" + message,   
-                    "vietazn@gmail.com",
-                    "hoanglong@gmail.com");   
+        	String[] toAddress = {"hoanglong@gmail.com"};	
+        	String emailBody = "<html><p>Greetings from fake Amazon Payments!</p><p>You have received a payment request, please click on the button to pay:</p><a href= \"https://payments.amazon.com/sdui/sdui/paymentsend?&targetAccount=hoanglong%40gmail.com&amount=11.44&note=blah\"><img src=\"https://images-na.ssl-images-amazon.com/images/G/01/EP/offAmazonPayments/us/live/devo/image/pwa/orange/large/dark/button.png\" border=\"0\"/></a><p>Thank you for using fake Amazon Payments!</p></html>";
+        	new SendEmailAsyncTask(toAddress, emailBody ).execute();
         } catch (Exception e) {   
-            System.out.println(e.getMessage());   
+            System.out.println(e);   
         } 
 		
 /*		setContentView(R.layout.activity_display_message);
@@ -76,5 +76,4 @@ public class DisplayMessageActivity extends ActionBarActivity {
 			return rootView;
 		}
 	}
-
 }

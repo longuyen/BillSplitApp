@@ -24,7 +24,6 @@
     <string name="total">Total:</string>
     <string name="zero">0.00</string>
     <string name="custom">Custom:</string>
-
     <string name="title_activity_activity_send">Review Split</string>
     <string name="confirm_split_button">Confirm Split</string>
     <string name="list_of_friends">Friends to split with</string>
@@ -32,4 +31,5 @@
     <string name="title_activity_add_friends">Add Friends</string>
 
     <string name="button_scan_bill">Scan Bill / Auto-Itemize</string>
+    <string name="add_friends">Add Friends</string>
 </resources>

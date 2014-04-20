@@ -45,9 +45,9 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Send emails"
-                android:id="@+id/button"
-                android:onClick="calculateBillSplit"
+                android:text="Send Payment Requests"
+                android:id="@+id/sendPaymentRequets"
+                android:onClick="sendPaymentRequests"
                 android:layout_column="1" />
         </TableRow>
 

@@ -187,8 +187,8 @@ public class BillSplitCalculatorActivity extends ActionBarActivity {
 	};
 	
     public void addFriends(View view){
-    	Intent intent = new Intent(this, DisplayMessageActivity.class);
-    	intent.putExtra(EXTRA_BILL_TOTAL, currentBillTotal);
+    	Intent intent = new Intent(this, AddFriends.class);
+    	intent.putExtra(EXTRA_BILL_TOTAL, Double.parseDouble(totalCustomEditText.getText().toString()));
     	startActivity(intent);
     }
 

@@ -28,8 +28,8 @@ public class AddFriends extends ActionBarActivity implements AdapterView.OnItemS
     static Map<String, String> preStored = new HashMap<String, String>();
     static {
         preStored.put("", "");
-        preStored.put("Long", "lnnguyen@amazon.com");
-        preStored.put("Chen", "huangche@amazon.com");
+        preStored.put("Long", "hoanglong@gmail.com");
+        preStored.put("Chen", "branchchen66@gmail.com");
         preStored.put("Tony", "tonyhu@amazon.com");
         preStored.put("Yash", "yashcp@amazon.com");
         preStored.put("Min", "heeyoo@amazon.com");

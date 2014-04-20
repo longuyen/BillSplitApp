@@ -15,8 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.app.billsplitapp.util.SendEmailAsyncTask;
 
 
 public class SendActivity extends ActionBarActivity {
@@ -114,5 +117,29 @@ public class SendActivity extends ActionBarActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public void sendPaymentRequests(View view) {
+		for(PaymentInfo pi: paymentInfos) {
+	        try {   
+	        	String[] toAddress = {pi.email};
+	        	String paymentRequestAmount = new DecimalFormat("#").format(pi.amount);
+	        	String emailBody = generateHtmlEmailBody(paymentRequestAmount);
+	        	
+	        	new SendEmailAsyncTask(toAddress, emailBody ).execute();
+	        } catch (Exception e) {   
+	            System.out.println(e);   
+	        } 
+		}
+
+	}
+	
+	private String generateHtmlEmailBody(String requestAmount) {
+		String paymentRequestNote = "Pay Back for Pho Bac!";
+		String emailBody = "<html><p>Greetings from fake Amazon Payments!</p><p>You have received a payment request, please click on the button to pay:</p><a href= \"https://payments.amazon.com/sdui/sdui/paymentsend?&targetAccount=hoanglong%40gmail.com&amount="+
+			requestAmount + "&note=" +
+			paymentRequestNote +"\"><img src=\"https://images-na.ssl-images-amazon.com/images/G/01/EP/offAmazonPayments/us/live/devo/image/pwa/orange/large/dark/button.png\" border=\"0\"/></a><p>Thank you for using fake Amazon Payments!</p></html>";
+    	
+		return emailBody;
 	}
 }
